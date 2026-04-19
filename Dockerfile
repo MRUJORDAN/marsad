@@ -1,14 +1,15 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
-COPY MorsadBackend.Core/MorsadBackend.Core.csproj             MorsadBackend.Core/
-COPY MorsadBackend.Infrastructure/MorsadBackend.Infrastructure.csproj MorsadBackend.Infrastructure/
-COPY MorsadBackend.Api/MorsadBackend.Api.csproj               MorsadBackend.Api/
+COPY MorsadBackend.Core.csproj             MorsadBackend.Core.csproj
+COPY MorsadBackend.Infrastructure.csproj  MorsadBackend.Infrastructure.csproj
+COPY MorsadBackend.Api.csproj             MorsadBackend.Api.csproj
 
-RUN dotnet restore MorsadBackend.Api/MorsadBackend.Api.csproj
+RUN dotnet restore MorsadBackend.Api.csproj
 
 COPY . .
-RUN dotnet publish MorsadBackend.Api/MorsadBackend.Api.csproj -c Release -o /app/out
+
+RUN dotnet publish MorsadBackend.Api.csproj -c Release -o /app/out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
