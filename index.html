@@ -408,6 +408,7 @@ body::before{content:'';position:fixed;inset:0;background:repeating-linear-gradi
 // ══════════════════════════════════════════════════════════════════
 const CONFIG = {
   CLAUDE_API_KEY: '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',           console.anthropic.com
+
   CLAUDE_MODEL:   'claude-haiku-4-5-20251001',
   DB_API_URL:     'https://morsad-api.onrender.com',          // ← رابط Backend بعد النشر على Render (اختياري)
   REFRESH_HOURS:  6,           // تحديث تلقائي كل 6 ساعات
@@ -1116,6 +1117,10 @@ function init() {
   refreshAll();
 
   // تحديث تلقائي
+  // // إبقاء الخادم مستيقظاً
+setInterval(() => fetch('https://morsad-.onrender.com//health').catch(()=>{}), 14 * 60 * 1000);
+  }
+
   setInterval(refreshAll, CONFIG.REFRESH_HOURS * 60 * 60 * 1000);
 }
 
